@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+  		<AutoCompleteTextView
+  			android:id="@+id/find_field"
+  			android:layout_width="wrap_content"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1"
+  			android:lines="1"/>
+  		<Button
+  			android:id="@+id/find_button"
+  		  	android:layout_width="wrap_content"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1"
+  			android:text="@string/find_button_text"/>
+ 	</LinearLayout>
+ 	<!-- eu.chuvash.android.lusites.LuSitesMap -->
+	<com.google.android.maps.MapView
+		android:id="@+id/lusites_map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:apiKey="0Kad2Ubpzr4nTe_rK1-KGD96uFqbm3hMBFopLJw" />
+        <!-- 
+        release key: 0Kad2Ubpzr4nTe_rK1-KGD96uFqbm3hMBFopLJw
+        development key: 0Kad2Ubpzr4nRKcEfjvBxYLaNlQk2ar3OHORRzA -->
+</LinearLayout>

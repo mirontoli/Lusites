@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- 
+  	<item 
+		android:alphabeticShortcut="@string/menu_find_alphabetic_shortcut" 
+		android:title="@string/menu_find_title"  
+		android:id="@+id/find_menu" 
+		android:icon="@android:drawable/ic_search_category_default"/>	
+		 -->
+	<item 
+		android:alphabeticShortcut="@string/menu_settings_alphabetic_shortcut" 
+		android:title="@string/menu_settings_title"  
+		android:id="@+id/settings_menu" 
+		android:icon="@android:drawable/ic_menu_preferences"/>	
+</menu>

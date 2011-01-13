@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">hello!</string>
+    <string name="app_name">LU Sites</string>
+    <string name="app_full_name">Lund University Sites</string>
+    <string name="menu_settings_title">Settings</string>
+    <string name="menu_settings_alphabetic_shortcut">s</string>
+    <string name="menu_find_title">Find</string>
+    <string name="menu_find_alphabetic_shortcut">f</string>
+    <string name="settings_label">Settings</string>
+    <string name="settings_satellite_title">Satellite</string>
+    <string name="settings_satellite_summary">Enable satellite layer</string>
+    <string name="find_button_text">find</string>
+</resources>
