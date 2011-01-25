@@ -16,7 +16,7 @@ public class OverlayController {
 	private static OverlayController oController;
 	private LUSitesActivity activity;
 	private List<Overlay> olList;
-	private OverlayItem currentOI;
+	private LUSiteOverlayItem currentOI;
 	public LUSiteOverlay currentOverlay;
 	public Drawable auditoriumMarker;
 	private Drawable auditoriumRedMarker;
@@ -78,7 +78,7 @@ public class OverlayController {
 
 	public OverlayItem searchItem(String word) {
 		cleanCurrentOI();
-		OverlayItem oi = null;
+		LUSiteOverlayItem loi = null;
 		boolean found = false;
 		int counter = 0;
 		updateOlList();
@@ -86,16 +86,16 @@ public class OverlayController {
 			Overlay o = olList.get(counter);
 			if (o instanceof LUSiteOverlay) {
 				LUSiteOverlay lo = (LUSiteOverlay) o;
-				oi = lo.findOverlayItem(word);
-				if (oi != null) {
+				loi = lo.findOverlayItem(word);
+				if (loi != null) {
 					found = true;					
-					currentOI = oi;
+					currentOI = loi;
 					currentOverlay = lo;
 				}
 			}
 			counter++;
 		}
-		return oi;
+		return loi;
 	}
 
 	public void handleMarking() {

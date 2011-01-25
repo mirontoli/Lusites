@@ -32,16 +32,16 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 		return new GeoPoint(latE6, longE6);
 	}
 	public abstract void initLUSites();
-	public OverlayItem findOverlayItem(String searchName) {
-		OverlayItem overlayItem = null;
+	public LUSiteOverlayItem findOverlayItem(String searchName) {
+		LUSiteOverlayItem overlayItem = null;
 		searchName = searchName.trim().toLowerCase();
 		int counter = 0;
 		int limit = overlayItems.size();
 		while (overlayItem == null && counter < limit) {
-			OverlayItem oi = overlayItems.get(counter);
-			String title = oi.getTitle().toLowerCase();
+			LUSiteOverlayItem loi = overlayItems.get(counter);
+			String title = loi.getTitle().toLowerCase();
 			if (searchName.equals(title)) {
-				overlayItem = oi;
+				overlayItem = loi;
 			}
 			counter++;
 		}
