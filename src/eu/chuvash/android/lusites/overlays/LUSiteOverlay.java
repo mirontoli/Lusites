@@ -9,13 +9,22 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
-public abstract class LUSiteOverlay extends ItemizedOverlay<OverlayItem> {
+public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	//private static final String TAG = "LUSiteOverlay";
 	protected static int MILLION = 1000000;
 	protected Context context;
-	protected ArrayList<OverlayItem> overlayItems;
+	protected ArrayList<LUSiteOverlayItem> overlayItems = new ArrayList<LUSiteOverlayItem>();
 	public LUSiteOverlay(Drawable defaultMarker) {
 		super(defaultMarker);
+	}
+	@Override
+	protected LUSiteOverlayItem createItem(int i) {
+		OverlayItem oi = overlayItems.get(i);
+		return (LUSiteOverlayItem) oi;
+	}
+	@Override
+	public int size() {
+		return overlayItems.size();
 	}
 	protected GeoPoint getPoint(double longitude, double latitude) {
 		int longE6 = (int) (longitude * MILLION);
@@ -38,4 +47,5 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<OverlayItem> {
 		}
 		return overlayItem;
 	}
+
 }

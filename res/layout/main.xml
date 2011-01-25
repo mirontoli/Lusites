@@ -26,7 +26,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="0Kad2Ubpzr4nTe_rK1-KGD96uFqbm3hMBFopLJw" />
+        android:apiKey="0Kad2Ubpzr4nRKcEfjvBxYLaNlQk2ar3OHORRzA" />
         <!-- 
         release key: 0Kad2Ubpzr4nTe_rK1-KGD96uFqbm3hMBFopLJw
         development key: 0Kad2Ubpzr4nRKcEfjvBxYLaNlQk2ar3OHORRzA -->

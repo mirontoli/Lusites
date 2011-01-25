@@ -19,16 +19,6 @@ public class AuditoriumOverlay extends LUSiteOverlay {
 		this.context = context;
 		initLUSites();
 	}
-	@Override
-	protected OverlayItem createItem(int i) {
-		OverlayItem oi = overlayItems.get(i);
-		return oi;
-	}
-
-	@Override
-	public int size() {
-		return overlayItems.size();
-	}
 	// inspired by: 
 	//http://codemagician.wordpress.com/2010/05/06/android-google-mapview-tutorial-done-right/
 	@Override
@@ -39,14 +29,12 @@ public class AuditoriumOverlay extends LUSiteOverlay {
 	}
 	@Override
 	public void initLUSites() {
-		overlayItems = new ArrayList<OverlayItem>();
-		LUSitesList luSites = LUSitesList.getLUSitesList(context);
-		
+		LUSitesList luSites = LUSitesList.getLUSitesList(context);		
 		if (luSites.size() > 0) {
 			for (LUSite ls : luSites) {
 				if (ls instanceof Auditorium) {
 					GeoPoint gp = getPoint(ls.getLongitude(), ls.getLatitude());
-					OverlayItem item = new OverlayItem(gp, ls.getName(), ls.getSnippet());
+					LUSiteOverlayItem item = new LUSiteOverlayItem(gp, ls.getName(), ls.getSnippet());
 					overlayItems.add(item);
 				}
 			}
