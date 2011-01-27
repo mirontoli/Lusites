@@ -1,7 +1,5 @@
 package eu.chuvash.android.lusites.overlays;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -15,8 +13,8 @@ import eu.chuvash.android.lusites.util.Helper;
 
 public class BikePumpOverlay extends LUSiteOverlay {
 
-	public BikePumpOverlay(Drawable marker, Context context) {
-		super(boundCenterBottom(marker));
+	public BikePumpOverlay(Context context) {
+		super();
 		this.context = context;
 		initLUSites();
 	}
@@ -30,10 +28,12 @@ public class BikePumpOverlay extends LUSiteOverlay {
 	public void initLUSites() {
 		LUSitesList luSites = LUSitesList.getLUSitesList(context);
 		if (luSites.size() > 0) {
+			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.pump_pin);
+			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.red_arrow);
 			for (LUSite ls : luSites) {
 				if (ls instanceof BikePump){
 					GeoPoint gp = getPoint(ls.getLongitude(), ls.getLatitude());
-					LUSiteOverlayItem item = new LUSiteOverlayItem(gp, ls.getName(), ls.getSnippet());
+					LUSiteOverlayItem item = new LUSiteOverlayItem(gp, ls.getName(), ls.getSnippet(), defaultMarker, highlightedMarker);
 					overlayItems.add(item);
 				}
 			}

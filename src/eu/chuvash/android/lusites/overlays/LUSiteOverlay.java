@@ -14,8 +14,8 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	protected static int MILLION = 1000000;
 	protected Context context;
 	protected ArrayList<LUSiteOverlayItem> overlayItems = new ArrayList<LUSiteOverlayItem>();
-	public LUSiteOverlay(Drawable defaultMarker) {
-		super(defaultMarker);
+	public LUSiteOverlay() {
+		super(null);
 	}
 	@Override
 	protected LUSiteOverlayItem createItem(int i) {
@@ -30,6 +30,13 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 		int longE6 = (int) (longitude * MILLION);
 		int latE6 = (int) (latitude * MILLION);
 		return new GeoPoint(latE6, longE6);
+	}
+	protected Drawable getMarker(int resource) {
+		Drawable marker=context.getResources().getDrawable(resource);	
+		marker.setBounds(0, 0, marker.getIntrinsicWidth(),
+											marker.getIntrinsicHeight());
+		boundCenter(marker);
+		return(marker);
 	}
 	public abstract void initLUSites();
 	public LUSiteOverlayItem findOverlayItem(String searchName) {

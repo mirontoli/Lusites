@@ -8,16 +8,15 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
 import eu.chuvash.android.lusites.overlays.AuditoriumOverlay;
 import eu.chuvash.android.lusites.overlays.BikePumpOverlay;
+import eu.chuvash.android.lusites.overlays.LUSiteOverlayItem;
 import eu.chuvash.android.lusites.overlays.OverlayController;
 import eu.chuvash.android.lusites.util.Helper;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -124,17 +123,9 @@ public class LUSitesActivity extends MapActivity {
 
 	private void initLUSitesMap() {
 		lusitesMap = (MapView) findViewById(R.id.lusites_map);
-		lusitesMap.getOverlays().clear();
-		lusitesMap = null;
-		lusitesMap = (MapView) findViewById(R.id.lusites_map);
-		for (int i = lusitesMap.getOverlays().size() -1; i > 0; i--) {
-			lusitesMap.getOverlays().remove(i);
-		}
-		
-		lusitesMap.invalidate();
+
 		controller = lusitesMap.getController();
 		// lusitesMap.setEnabled(true);
-		// lusitesMap.setSatellite(true);
 		lusitesMap.setBuiltInZoomControls(true);
 		//lusitesMap.setStreetView(true);
 
@@ -188,14 +179,10 @@ public class LUSitesActivity extends MapActivity {
 
 	private void initLusitesOverlays() {
 		oController = OverlayController.getOverlayController(this);
-//		oController.initOverlays();
-		Drawable auditoriumMarker = oController.auditoriumMarker;
-		AuditoriumOverlay auditoriumOverlay = new AuditoriumOverlay(
-				auditoriumMarker, this);
+		AuditoriumOverlay auditoriumOverlay = new AuditoriumOverlay(this);
 		lusitesMap.getOverlays().add(auditoriumOverlay);
 		
-		Drawable pumpMarker = oController.pumpMarker;
-		BikePumpOverlay bpOverlay = new BikePumpOverlay(pumpMarker, this);
+		BikePumpOverlay bpOverlay = new BikePumpOverlay(this);
 		lusitesMap.getOverlays().add(bpOverlay);
 	}
 
@@ -232,17 +219,11 @@ public class LUSitesActivity extends MapActivity {
 		}
 		//oController.handleSearch(word);
 		//OverlayItem currentOI = oController.getCurrentOI();
-		OverlayItem currentOI = oController.searchItem(word); //test
+		LUSiteOverlayItem currentOI = oController.searchItem(word); //test
 		
 		
 		if (currentOI != null) {
-			//oController.handleMarking();
-			//oController.handleMarking2(this);
-			
-			Drawable redArrowMarker = getResources().getDrawable(
-					R.drawable.red_arrow);
-			redArrowMarker.setBounds(0,0, redArrowMarker.getIntrinsicWidth(), redArrowMarker.getIntrinsicHeight());
-			currentOI.setMarker(redArrowMarker); //teset
+			currentOI.toggleHighlight();
 			Helper.showDialog(currentOI, this); //test
 			controller.animateTo(currentOI.getPoint());
 			// controller.zoomToSpan(oi.getPoint().getLatitudeE6(),
