@@ -7,7 +7,8 @@ import android.graphics.drawable.Drawable;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.OverlayItem;
+
+import eu.chuvash.android.lusites.util.Helper;
 
 public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	//private static final String TAG = "LUSiteOverlay";
@@ -19,12 +20,25 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	}
 	@Override
 	protected LUSiteOverlayItem createItem(int i) {
-		OverlayItem oi = overlayItems.get(i);
-		return (LUSiteOverlayItem) oi;
+		LUSiteOverlayItem oi = overlayItems.get(i);
+		return oi;
 	}
 	@Override
 	public int size() {
 		return overlayItems.size();
+	}
+	// inspired by:
+	// http://codemagician.wordpress.com/2010/05/06/android-google-mapview-tutorial-done-right/
+	@Override
+	protected boolean onTap(int index) {
+		markOI(index);
+		return true;
+	}
+	public void markOI(int index) {
+		LUSiteOverlayItem loi = createItem(index);
+		OverlayController.getOverlayController(context).setCurrentOI(loi);
+		//toggleHighlight();
+		Helper.showDialog(loi, context);
 	}
 	protected GeoPoint getPoint(double longitude, double latitude) {
 		int longE6 = (int) (longitude * MILLION);
@@ -40,19 +54,22 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	}
 	public abstract void initLUSites();
 	public LUSiteOverlayItem findOverlayItem(String searchName) {
-		LUSiteOverlayItem overlayItem = null;
 		searchName = searchName.trim().toLowerCase();
 		int counter = 0;
-		int limit = overlayItems.size();
-		while (overlayItem == null && counter < limit) {
-			LUSiteOverlayItem loi = overlayItems.get(counter);
+		while (counter < size()) {
+			LUSiteOverlayItem loi = createItem(counter);//overlayItems.get(counter);
 			String title = loi.getTitle().toLowerCase();
 			if (searchName.equals(title)) {
-				overlayItem = loi;
+				return loi;
 			}
 			counter++;
 		}
-		return overlayItem;
+		return null;
 	}
-
+//	public void toggleHighlight() {
+//		LUSiteOverlayItem focus = getFocus();
+//		if (focus != null) {
+//			focus.toggleHighlight();
+//		}
+//	}
 }

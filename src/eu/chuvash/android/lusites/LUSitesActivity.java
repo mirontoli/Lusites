@@ -15,6 +15,7 @@ import eu.chuvash.android.lusites.overlays.LUSiteOverlayItem;
 import eu.chuvash.android.lusites.overlays.OverlayController;
 import eu.chuvash.android.lusites.util.Helper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -35,7 +37,7 @@ import android.widget.Toast;
 import static eu.chuvash.android.lusites.model.LUSitesList.LUSITES_NAMES;
 
 public class LUSitesActivity extends MapActivity {
-	private static final String TAG = "LUSitesActivity";
+	//private static final String TAG = "LUSitesActivity";
 	private static final int FIND_FIELD_THRESHOLD = 1;// after how many characters
 												// dropdown is shown
 	private MapView lusitesMap;
@@ -56,7 +58,6 @@ public class LUSitesActivity extends MapActivity {
 		initFindField();
 		initFindButton();
 	}
-
 	private void initFindField() {
 		findField = (AutoCompleteTextView) findViewById(R.id.find_field);
 		if (LUSITES_NAMES != null) {
@@ -210,6 +211,7 @@ public class LUSitesActivity extends MapActivity {
 	}
 
 	private void showFindResult() {
+		hideKeyboard();
 		String word = findField.getText().toString().trim().toLowerCase();
 		if (word.equals("")) {
 			Toast.makeText(LUSitesActivity.this,
@@ -223,7 +225,6 @@ public class LUSitesActivity extends MapActivity {
 		
 		
 		if (currentOI != null) {
-			currentOI.toggleHighlight();
 			Helper.showDialog(currentOI, this); //test
 			controller.animateTo(currentOI.getPoint());
 			// controller.zoomToSpan(oi.getPoint().getLatitudeE6(),
@@ -234,12 +235,18 @@ public class LUSitesActivity extends MapActivity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
+	// inspired by:
+	// http://www.androidguys.com/2009/11/12/how-to-showhide-soft-keyboard-programmatically-dev-tips-tools/
+	private void hideKeyboard() {
+		InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		mgr.hideSoftInputFromWindow(findField.getWindowToken(), 0);
+	}
 	public List<Overlay> getMapOverlays() {
 		return lusitesMap.getOverlays();
 	}
-	public void addOverlay(Overlay o) {
-		Log.d(TAG, "addOverlay");
-		lusitesMap.getOverlays().add(o);
-		lusitesMap.invalidate();
-	}
+//	public void addOverlay(Overlay o) {
+//		Log.d(TAG, "addOverlay");
+//		lusitesMap.getOverlays().add(o);
+//		lusitesMap.invalidate();
+//	}
 }
