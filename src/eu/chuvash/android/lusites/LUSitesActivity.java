@@ -12,7 +12,7 @@ import com.google.android.maps.Overlay;
 import eu.chuvash.android.lusites.overlays.AuditoriumOverlay;
 import eu.chuvash.android.lusites.overlays.BikePumpOverlay;
 import eu.chuvash.android.lusites.overlays.LUSiteOverlayItem;
-import eu.chuvash.android.lusites.overlays.OverlayController;
+import eu.chuvash.android.lusites.overlays.OverlayMediator;
 import eu.chuvash.android.lusites.util.Helper;
 
 import android.content.Context;
@@ -21,7 +21,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuInflater;
@@ -44,7 +43,7 @@ public class LUSitesActivity extends MapActivity {
 	private MapController controller;
 	private AutoCompleteTextView findField;
 	private Button findButton;
-	private OverlayController oController;
+	private OverlayMediator oMediator;
 
 
 	@Override
@@ -179,7 +178,7 @@ public class LUSitesActivity extends MapActivity {
 	}
 
 	private void initLusitesOverlays() {
-		oController = OverlayController.getOverlayController(this);
+		oMediator = OverlayMediator.getInstance(this);
 		AuditoriumOverlay auditoriumOverlay = new AuditoriumOverlay(this);
 		lusitesMap.getOverlays().add(auditoriumOverlay);
 		
@@ -221,7 +220,7 @@ public class LUSitesActivity extends MapActivity {
 		}
 		//oController.handleSearch(word);
 		//OverlayItem currentOI = oController.getCurrentOI();
-		LUSiteOverlayItem currentOI = oController.searchItem(word); //test
+		LUSiteOverlayItem currentOI = oMediator.searchItem(word); //test
 		
 		
 		if (currentOI != null) {

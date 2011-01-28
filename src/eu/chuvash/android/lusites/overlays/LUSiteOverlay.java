@@ -36,8 +36,7 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	}
 	public void markOI(int index) {
 		LUSiteOverlayItem loi = createItem(index);
-		OverlayController.getOverlayController(context).setCurrentOI(loi);
-		//toggleHighlight();
+		OverlayMediator.getInstance(context).setCurrentOI(loi);
 		Helper.showDialog(loi, context);
 	}
 	protected GeoPoint getPoint(double longitude, double latitude) {
@@ -57,7 +56,7 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 		searchName = searchName.trim().toLowerCase();
 		int counter = 0;
 		while (counter < size()) {
-			LUSiteOverlayItem loi = createItem(counter);//overlayItems.get(counter);
+			LUSiteOverlayItem loi = createItem(counter);
 			String title = loi.getTitle().toLowerCase();
 			if (searchName.equals(title)) {
 				return loi;
@@ -66,10 +65,4 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 		}
 		return null;
 	}
-//	public void toggleHighlight() {
-//		LUSiteOverlayItem focus = getFocus();
-//		if (focus != null) {
-//			focus.toggleHighlight();
-//		}
-//	}
 }
