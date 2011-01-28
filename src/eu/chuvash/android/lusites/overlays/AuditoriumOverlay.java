@@ -19,7 +19,7 @@ public class AuditoriumOverlay extends LUSiteOverlay {
 	public void initLUSites() {
 		LUSitesList luSites = LUSitesList.getLUSitesList(context);
 		if (luSites.size() > 0) {
-			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.auditorium_pin);
+			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.auditorium_full);
 			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.auditorium_red_pin);
 			for (LUSite ls : luSites) {
 				if (ls instanceof Auditorium) {

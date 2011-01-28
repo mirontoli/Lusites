@@ -123,6 +123,7 @@ public class LUSitesActivity extends MapActivity {
 
 	private void initLUSitesMap() {
 		lusitesMap = (MapView) findViewById(R.id.lusites_map);
+		lusitesMap.getOverlays().clear();
 
 		controller = lusitesMap.getController();
 		// lusitesMap.setEnabled(true);
@@ -184,6 +185,7 @@ public class LUSitesActivity extends MapActivity {
 		
 		BikePumpOverlay bpOverlay = new BikePumpOverlay(this);
 		lusitesMap.getOverlays().add(bpOverlay);
+		lusitesMap.invalidate();
 	}
 
 	private void startSettings() {
@@ -213,25 +215,21 @@ public class LUSitesActivity extends MapActivity {
 		hideKeyboard();
 		String word = findField.getText().toString().trim().toLowerCase();
 		if (word.equals("")) {
-			Toast.makeText(LUSitesActivity.this,
-					"Write an auditorium first" + word, Toast.LENGTH_LONG)
+			String warning = getString(R.string.warning_empty_find_field);
+			Toast.makeText(LUSitesActivity.this, warning, Toast.LENGTH_LONG)
 					.show();
 			return;
 		}
-		//oController.handleSearch(word);
-		//OverlayItem currentOI = oController.getCurrentOI();
-		LUSiteOverlayItem currentOI = oMediator.searchItem(word); //test
-		
-		
-		if (currentOI != null) {
-			Helper.showDialog(currentOI, this); //test
-			controller.animateTo(currentOI.getPoint());
-			// controller.zoomToSpan(oi.getPoint().getLatitudeE6(),
-			// oi.getPoint().getLongitudeE6());
-			// controller.setZoom(17);
-		} else {
-			Toast.makeText(LUSitesActivity.this, "Sorry, not found: " + word,
-					Toast.LENGTH_LONG).show();
+
+		boolean found = oMediator.searchItem(word); // test
+
+		if (!found) {
+			String msg = getString(R.string.message_lusite_not_found);
+			Toast.makeText(LUSitesActivity.this, msg + ": " + word, Toast.LENGTH_LONG)
+					.show();
+		}
+		if (found) {
+			lusitesMap.invalidate();
 		}
 	}
 	// inspired by:
@@ -243,9 +241,9 @@ public class LUSitesActivity extends MapActivity {
 	public List<Overlay> getMapOverlays() {
 		return lusitesMap.getOverlays();
 	}
-//	public void addOverlay(Overlay o) {
-//		Log.d(TAG, "addOverlay");
-//		lusitesMap.getOverlays().add(o);
-//		lusitesMap.invalidate();
-//	}
+	public void flyTo(GeoPoint gp) {
+		controller.animateTo(gp);
+		//controller.zoomToSpan(gp.getLatitudeE6(), gp.getLongitudeE6());
+		//controller.setZoom(17);
+	}
 }

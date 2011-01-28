@@ -3,17 +3,18 @@ package eu.chuvash.android.lusites.overlays;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.google.android.maps.Overlay;
 
 import eu.chuvash.android.lusites.LUSitesActivity;
+import eu.chuvash.android.lusites.util.Helper;
 
 public class OverlayMediator {
-	// private static final String TAG = "OverlayController";
+	private static final String TAG = "OverlayMediator";
 	private static OverlayMediator singleton;
 	private LUSitesActivity activity;
-	private List<Overlay> olList;
 	private LUSiteOverlayItem currentOI;
-	public LUSiteOverlay currentOverlay;
 
 	private OverlayMediator() {
 	}
@@ -24,64 +25,57 @@ public class OverlayMediator {
 
 	public static OverlayMediator getInstance(Context context) {
 		if (singleton == null) {
-			singleton = new OverlayMediator(context);
+			singleton = new OverlayMediator();
 		}
+		singleton.setActivity((LUSitesActivity) context);
 		return singleton;
 	}
 
-	public LUSiteOverlayItem searchItem(String word) {
-		// cleanCurrentOI();
-		LUSiteOverlayItem loi = null;
-		boolean found = false;
-		int counter = 0;
-		updateOlList();
-		while (!found && counter < olList.size()) {
+	public boolean searchItem(String word) {
+		Log.d(TAG, "searchItem. activity toString: " + activity.toString());
+		List<Overlay> olList = activity.getMapOverlays();
+		Log.d(TAG, "searchItem. olList size: " + olList.size());
+		int counter = olList.size() - 1;
+		while (counter > -1) {
 			Overlay o = olList.get(counter);
 			if (o instanceof LUSiteOverlay) {
 				LUSiteOverlay lo = (LUSiteOverlay) o;
-				loi = lo.findOverlayItem(word);
+				LUSiteOverlayItem loi = lo.findOverlayItem(word);
 				if (loi != null) {
-					found = true;
-					setCurrentOI(loi);
-					currentOverlay = lo;
+					lo.setFocus(loi);
+					Log.d(TAG, "searchItem. loi to String: " + loi.toString() + "; title: " + loi.getTitle());
+					//lo.simulateOnTap(loi);
+					//setCurrentOI(loi);
+					return true;
 				}
 			}
-			counter++;
+			counter--;
 		}
-		return loi;
+		return false;
 	}
-
-	// public void handleMarking() {
-	// currentOI.toggleHighlight();
-	// Helper.showDialog(currentOI, activity);
-	// }
 
 	private void cleanCurrentOI() {
 		if (currentOI != null) {
 			currentOI.toggleHighlight();
 			currentOI = null;
-			// currentOverlay = null;
 		}
 	}
-
-	private void updateOlList() {
-		olList = activity.getMapOverlays();
+	public LUSiteOverlayItem getCurrentOI() {
+		return currentOI;
 	}
-
-	// public void handleSearch(String word) {
-	// searchItem(word);
-	// if (currentOI != null){
-	// handleMarking();
-	// }
-	// }
-	// public OverlayItem getCurrentOI() {
-	// return currentOI;
-	// }
 	public void setCurrentOI(LUSiteOverlayItem loi) {
 		cleanCurrentOI();
 		if (loi != null) {
 			currentOI = loi;
-			currentOI.toggleHighlight();
+			loi.toggleHighlight();
+			//Helper.showDialog(currentOI, activity);
+			Log.d(TAG, "setCurrentOI after loi.toggleHighlight");
+			activity.flyTo(loi.getPoint());
+			Log.d(TAG, "setCurrentOI after activity.flyTo");
 		}
+	}
+	public void setActivity(LUSitesActivity lsa) {
+		activity = null;
+		activity = lsa;
 	}
 }

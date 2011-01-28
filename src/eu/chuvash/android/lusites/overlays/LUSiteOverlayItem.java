@@ -26,16 +26,16 @@ public class LUSiteOverlayItem extends OverlayItem {
 	@Override
 	public Drawable getMarker(int stateBitset) {
 		Drawable result = (highlighted ? highlightedMarker : defaultMarker);
-		//setState(result, stateBitset);
+		setState(result, stateBitset);
 		return result;
 	}
 
 	public void toggleHighlight() {
-		if (!highlighted) Log.d(TAG, "toggleHighlight 2 HIGHLIGHT: " + this.getTitle());
-		if (highlighted) Log.d(TAG, "toggleHighlight FROM HIGHLIGHT: " + this.getTitle());
-		highlighted = !highlighted;
-		Drawable marker = (highlighted ? highlightedMarker : defaultMarker);
-		this.setMarker(marker);		
+//		if (!highlighted) Log.d(TAG, "toggleHighlight 2 HIGHLIGHT: " + this.getTitle());
+//		if (highlighted) Log.d(TAG, "toggleHighlight FROM HIGHLIGHT: " + this.getTitle());
+//		highlighted = !highlighted;
+//		Drawable marker = (highlighted ? highlightedMarker : defaultMarker);
+//		this.setMarker(marker);	
 	}
 
 }
