@@ -22,7 +22,7 @@ public class BikePumpOverlay extends LUSiteOverlay {
 		LUSitesList luSites = LUSitesList.getLUSitesList(context);
 		if (luSites.size() > 0) {
 			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.pump_pin);
-			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.red_arrow);
+			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.pump_red_pin);
 			for (LUSite ls : luSites) {
 				if (ls instanceof BikePump) {
 					GeoPoint gp = getPoint(ls.getLongitude(), ls.getLatitude());
