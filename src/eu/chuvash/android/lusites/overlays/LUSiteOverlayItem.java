@@ -1,13 +1,12 @@
 package eu.chuvash.android.lusites.overlays;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
 public class LUSiteOverlayItem extends OverlayItem {
-	private static final String TAG = "LUSiteOverlayItem";
+	//private static final String TAG = "LUSiteOverlayItem";
 	private Drawable defaultMarker;
 	private Drawable highlightedMarker;
 	private boolean highlighted = false;
@@ -31,11 +30,9 @@ public class LUSiteOverlayItem extends OverlayItem {
 	}
 
 	public void toggleHighlight() {
-//		if (!highlighted) Log.d(TAG, "toggleHighlight 2 HIGHLIGHT: " + this.getTitle());
-//		if (highlighted) Log.d(TAG, "toggleHighlight FROM HIGHLIGHT: " + this.getTitle());
-//		highlighted = !highlighted;
-//		Drawable marker = (highlighted ? highlightedMarker : defaultMarker);
-//		this.setMarker(marker);	
+		highlighted = !highlighted;
+		Drawable marker = (highlighted ? highlightedMarker : defaultMarker);
+		this.setMarker(marker);	
 	}
 
 }

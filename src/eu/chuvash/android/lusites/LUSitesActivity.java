@@ -9,11 +9,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 
-import eu.chuvash.android.lusites.overlays.AuditoriumOverlay;
-import eu.chuvash.android.lusites.overlays.BikePumpOverlay;
-import eu.chuvash.android.lusites.overlays.LUSiteOverlayItem;
 import eu.chuvash.android.lusites.overlays.OverlayMediator;
-import eu.chuvash.android.lusites.util.Helper;
 
 import android.content.Context;
 import android.content.Intent;
@@ -141,6 +137,7 @@ public class LUSitesActivity extends MapActivity {
 		// return true;
 		// }
 		// });
+
 	}
 
 	/*
@@ -180,11 +177,7 @@ public class LUSitesActivity extends MapActivity {
 
 	private void initLusitesOverlays() {
 		oMediator = OverlayMediator.getInstance(this);
-		AuditoriumOverlay auditoriumOverlay = new AuditoriumOverlay(this);
-		lusitesMap.getOverlays().add(auditoriumOverlay);
-		
-		BikePumpOverlay bpOverlay = new BikePumpOverlay(this);
-		lusitesMap.getOverlays().add(bpOverlay);
+		oMediator.initLusitesOverlays();
 		lusitesMap.invalidate();
 	}
 
