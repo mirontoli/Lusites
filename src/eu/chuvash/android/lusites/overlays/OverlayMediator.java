@@ -31,6 +31,9 @@ public class OverlayMediator {
 		
 		BikePumpOverlay bpOverlay = new BikePumpOverlay(activity);
 		activity.getMapOverlays().add(bpOverlay);
+		
+		LibraryOverlay lOverlay = new LibraryOverlay(activity);
+		activity.getMapOverlays().add(lOverlay);
 	}
 	public boolean searchItem(String word) {
 		List<Overlay> olList = activity.getMapOverlays();

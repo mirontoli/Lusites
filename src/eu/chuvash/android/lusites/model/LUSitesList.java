@@ -71,7 +71,8 @@ public class LUSitesList extends ArrayList<LUSite> {
 	private static void initLUSitesList(Context context) {
 		luSitesList = new LUSitesList();
 		loadAuditoriums(context);
-		loadBikePumps(context);		
+		loadBikePumps(context);	
+		loadLibraries(context);
 	}
 	private static void loadAuditoriums(Context context) {
 		LUSitesList luSites = getLUSites(context, eu.chuvash.android.lusites.R.raw.lusites_utf8);
@@ -86,5 +87,12 @@ public class LUSitesList extends ArrayList<LUSite> {
 			BikePump bp = new BikePump(ls.getLongitude(),ls.getLatitude(), ls.getName(), ls.getSnippet());
 			luSitesList.add(bp);
 		}		
+	}
+	private static void loadLibraries(Context context) {
+		LUSitesList luSites = getLUSites(context, eu.chuvash.android.lusites.R.raw.libraries_utf8);
+		for (LUSite ls: luSites) {
+			Library l = new Library(ls.getLongitude(), ls.getLatitude(), ls.getName(), ls.getSnippet());
+			luSitesList.add(l);
+		}
 	}
 }
