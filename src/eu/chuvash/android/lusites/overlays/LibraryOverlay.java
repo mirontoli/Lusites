@@ -16,8 +16,8 @@ public class LibraryOverlay extends LUSiteOverlay {
 	public void initLUSites() {
 		LUSitesList luSites = LUSitesList.getLUSitesList(context);
 		if (luSites.size() > 0) {
-			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.blue_pin);
-			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.red_arrow);
+			Drawable defaultMarker = getMarker(eu.chuvash.android.lusites.R.drawable.library_pin);
+			Drawable highlightedMarker = getMarker(eu.chuvash.android.lusites.R.drawable.library_red_pin);
 			for (LUSite ls : luSites) {
 				if (ls instanceof Library) {
 					GeoPoint gp = getPoint(ls.getLongitude(), ls.getLatitude());
