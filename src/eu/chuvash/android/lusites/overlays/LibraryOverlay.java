@@ -10,9 +10,7 @@ import android.graphics.drawable.Drawable;
 
 public class LibraryOverlay extends LUSiteOverlay {
 	public LibraryOverlay(Context context) {
-		super();
-		this.context = context;
-		initLUSites();
+		super(context);
 	}
 	@Override
 	public void initLUSites() {
@@ -31,7 +29,5 @@ public class LibraryOverlay extends LUSiteOverlay {
 			}
 			populate();
 		}
-
 	}
-
 }

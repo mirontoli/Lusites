@@ -11,9 +11,7 @@ import eu.chuvash.android.lusites.model.LUSitesList;
 public class AuditoriumOverlay extends LUSiteOverlay {
 
 	public AuditoriumOverlay(Context context) {
-		super();
-		this.context = context;
-		initLUSites();
+		super(context);
 	}
 	@Override
 	public void initLUSites() {

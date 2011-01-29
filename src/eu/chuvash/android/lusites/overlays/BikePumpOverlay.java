@@ -12,9 +12,7 @@ import eu.chuvash.android.lusites.model.LUSitesList;
 public class BikePumpOverlay extends LUSiteOverlay {
 
 	public BikePumpOverlay(Context context) {
-		super();
-		this.context = context;
-		initLUSites();
+		super(context);
 	}
 
 	@Override

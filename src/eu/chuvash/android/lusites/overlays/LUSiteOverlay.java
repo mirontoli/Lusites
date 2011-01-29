@@ -13,8 +13,10 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	protected static int MILLION = 1000000;
 	protected Context context;
 	protected ArrayList<LUSiteOverlayItem> overlayItems = new ArrayList<LUSiteOverlayItem>();
-	public LUSiteOverlay() {
+	public LUSiteOverlay(Context context) {
 		super(null);
+		this.context = context;
+		initLUSites();
 	}
 	@Override
 	protected LUSiteOverlayItem createItem(int i) {
