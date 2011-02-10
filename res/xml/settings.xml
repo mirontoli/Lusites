@@ -6,4 +6,9 @@
 		android:key="satellite" 
 		android:summary="@string/settings_satellite_summary" 
 		android:defaultValue="false"/>
+	<eu.chuvash.android.lusites.ListPreferenceMultiSelect
+		android:defaultValue="ALL" 
+		android:title="@string/settings_overlays_title"
+		android:summary="@string/settings_overlays_summary"
+		android:key="overlays_to_show" />
 </PreferenceScreen>

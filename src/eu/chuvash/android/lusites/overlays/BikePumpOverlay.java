@@ -33,4 +33,9 @@ public class BikePumpOverlay extends LUSiteOverlay {
 			populate();
 		}
 	}
+
+	@Override
+	public String getSettingsEntry() {
+		return context.getString(eu.chuvash.android.lusites.R.string.settings_overlays_item_bikepumps);
+	}
 }

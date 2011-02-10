@@ -28,7 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
-
+//TODO move LUSITES_NAMES to OverlayMediator
 import static eu.chuvash.android.lusites.model.LUSitesList.LUSITES_NAMES;
 
 public class LUSitesActivity extends MapActivity {
@@ -48,7 +48,7 @@ public class LUSitesActivity extends MapActivity {
 		setContentView(R.layout.main);
 		initLUSitesMap();
 		initMyLocation();
-		initLusitesOverlays();
+		addLusitesOverlays();
 		initPrefChangeListener();
 		initFindField();
 		initFindButton();
@@ -108,6 +108,8 @@ public class LUSitesActivity extends MapActivity {
 		public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
 			boolean showSatellite = sp.getBoolean("satellite", false);
 			lusitesMap.setSatellite(showSatellite);
+			oMediator.bringLusitesOverlaysOnMap();
+			lusitesMap.invalidate();
 		}
 	};
 
@@ -175,9 +177,9 @@ public class LUSitesActivity extends MapActivity {
 		lusitesMap.getOverlays().add(overlay);
 	}
 
-	private void initLusitesOverlays() {
+	private void addLusitesOverlays() {
 		oMediator = OverlayMediator.getInstance(this);
-		oMediator.initLusitesOverlays();
+		oMediator.bringLusitesOverlaysOnMap();
 		lusitesMap.invalidate();
 	}
 
@@ -194,7 +196,7 @@ public class LUSitesActivity extends MapActivity {
 	/*
 	 * The center in Lund University is the main building See here:
 	 * http://maps.google
-	 * .com/maps?f=q&source=s_q&hl=sv&geocode=&q=55.705829655611645
+	 * .com/maps?f=q&source=s_q&hl=stv&geocode=&q=55.705829655611645
 	 * ,+13.193483054637909
 	 * &sll=37.0625,-95.677068&sspLog.d(TAG, "addOverlay");n=33.29802,79.013672&ie=UTF8&z=15
 	 */

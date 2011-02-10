@@ -13,6 +13,7 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 	protected static int MILLION = 1000000;
 	protected Context context;
 	protected ArrayList<LUSiteOverlayItem> overlayItems = new ArrayList<LUSiteOverlayItem>();
+
 	public LUSiteOverlay(Context context) {
 		super(null);
 		this.context = context;
@@ -63,5 +64,9 @@ public abstract class LUSiteOverlay extends ItemizedOverlay<LUSiteOverlayItem> {
 			counter++;
 		}
 		return null;
+	}
+	public abstract String getSettingsEntry();
+	public String getSettingsEntryValue() {
+		return this.getClass().toString();
 	}
 }
