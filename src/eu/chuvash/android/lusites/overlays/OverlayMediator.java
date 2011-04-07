@@ -37,6 +37,7 @@ public class OverlayMediator {
 		allLusitesOverlays.add(new AuditoriumOverlay(activity));
 		allLusitesOverlays.add(new BikePumpOverlay(activity));
 		allLusitesOverlays.add(new LibraryOverlay(activity));
+		allLusitesOverlays.add(new NationOverlay(activity));
 	}
 	public void bringLusitesOverlaysOnMap() {
 		//TODO See if these two init methods invokes have to be invoked many times

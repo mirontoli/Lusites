@@ -73,6 +73,7 @@ public class LUSitesList extends ArrayList<LUSite> {
 		loadAuditoriums(context);
 		loadBikePumps(context);	
 		loadLibraries(context);
+		loadNations(context);
 	}
 	private static void loadAuditoriums(Context context) {
 		LUSitesList luSites = getLUSites(context, eu.chuvash.android.lusites.R.raw.lusites_utf8);
@@ -90,9 +91,16 @@ public class LUSitesList extends ArrayList<LUSite> {
 	}
 	private static void loadLibraries(Context context) {
 		LUSitesList luSites = getLUSites(context, eu.chuvash.android.lusites.R.raw.libraries_utf8);
-		for (LUSite ls: luSites) {
+		for (LUSite ls : luSites) {
 			Library l = new Library(ls.getLongitude(), ls.getLatitude(), ls.getName(), ls.getSnippet());
 			luSitesList.add(l);
+		}
+	}
+	private static void loadNations(Context context) {
+		LUSitesList luSites = getLUSites(context, eu.chuvash.android.lusites.R.raw.nations_utf8);
+		for (LUSite ls : luSites) {
+			Nation n = new Nation(ls.getLongitude(), ls.getLatitude(), ls.getName(), ls.getSnippet());
+			luSitesList.add(n);
 		}
 	}
 }
