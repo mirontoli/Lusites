@@ -12,11 +12,12 @@
     <string name="settings_satellite_summary">Enable satellite layer</string>
     <string name="find_button_text">find</string>
     <string name="warning_empty_find_field">Write an auditorium first</string>
-    <string name="message_lusite_not_found">Sorry not found </string>
+    <string name="message_lusite_not_found">Sorry, not found</string>
     
     <string name="settings_overlays_title">Overlays</string>
     <string name="settings_overlays_summary">Choose what to show on the map</string>
     <string name="settings_overlays_item_auditoriums">Auditoriums</string>
     <string name="settings_overlays_item_bikepumps">Bike pumps</string>
     <string name="settings_overlays_item_libraries">Libraries</string>
+    <string name="settings_overlays_item_nations">Nations</string>
 </resources>
