@@ -10,7 +10,7 @@
     <string name="settings_label">Inställningar</string>
     <string name="settings_satellite_title">Satellit</string>
     <string name="settings_satellite_summary">Aktivera satellitvy</string>
-    <string name="find_button_text">hitta</string>
-    <string name="warning_empty_find_field">Först måste du skriva något i sökfältet</string>
-    <string name="message_lusite_not_found">Tyvärr kunde vi inte hitta det</string>
+    <string name="find_button_text">Hitta</string>
+    <string name="warning_empty_find_field">Skriva text först</string>
+    <string name="message_lusite_not_found">Tyvärr gick det inte att finna</string>
 </resources>

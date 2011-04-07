@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">hello!</string>
+    <string name="hello">Hello!</string>
     <string name="app_name">LU Sites</string>
     <string name="app_full_name">Lund University Sites</string>
     <string name="menu_settings_title">Settings</string>
@@ -10,8 +10,8 @@
     <string name="settings_label">Settings</string>
     <string name="settings_satellite_title">Satellite</string>
     <string name="settings_satellite_summary">Enable satellite layer</string>
-    <string name="find_button_text">find</string>
-    <string name="warning_empty_find_field">Write an auditorium first</string>
+    <string name="find_button_text">Find</string>
+    <string name="warning_empty_find_field">Write text first</string>
     <string name="message_lusite_not_found">Sorry, not found</string>
     
     <string name="settings_overlays_title">Overlays</string>
