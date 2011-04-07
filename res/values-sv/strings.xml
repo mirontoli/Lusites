@@ -13,4 +13,11 @@
     <string name="find_button_text">Hitta</string>
     <string name="warning_empty_find_field">Skriva text först</string>
     <string name="message_lusite_not_found">Tyvärr gick det inte att finna</string>
+    
+    <string name="settings_overlays_title">Kartobjekt</string>
+    <string name="settings_overlays_summary">Välj vad som ska visas på kartan</string>
+    <string name="settings_overlays_item_auditoriums">Hörsalar</string>
+    <string name="settings_overlays_item_bikepumps">Cykelpumpar</string>
+    <string name="settings_overlays_item_libraries">Bibliotek</string>
+    <string name="settings_overlays_item_nations">Nationer</string>
 </resources>
