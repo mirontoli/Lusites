@@ -31,7 +31,7 @@ public class EventsActivity extends ListActivity {
 
 		//TODO extract this code to a an own class
 		try {
-			URL rssUrl = new URL("http://feeds.feedburner.com/Android-er?format=xml");
+			URL rssUrl = new URL("http://studentlund.se/feed/");
 			SAXParserFactory mySAXParserFactory = SAXParserFactory.newInstance();
 			SAXParser mySAXParser = mySAXParserFactory.newSAXParser();
 			XMLReader myXMLReader = mySAXParser.getXMLReader();
