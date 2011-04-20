@@ -21,15 +21,15 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
 public class EventsActivity extends ListActivity {
-
+	//private static final String TAG = "EventsActivity";
 	private List<String> item = new ArrayList<String>();
-
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.events);
+ 
 
+		//TODO extract this code to a an own class
 		try {
 			URL rssUrl = new URL("http://feeds.feedburner.com/Android-er?format=xml");
 			SAXParserFactory mySAXParserFactory = SAXParserFactory.newInstance();
@@ -54,10 +54,12 @@ public class EventsActivity extends ListActivity {
 			e.printStackTrace();
 		}
 
-		ArrayAdapter<String> itemList = new ArrayAdapter<String>(this, R.layout.events, item);
+		ArrayAdapter<String> itemList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item);
 		setListAdapter(itemList);
-	}
+		//test http://developer.android.com/guide/tutorials/views/hello-listview.html
+		getListView().setTextFilterEnabled(true);
 
+	}
 	private class RSSHandler extends DefaultHandler
 	{
 		final int stateUnknown = 0;
@@ -78,6 +80,7 @@ public class EventsActivity extends ListActivity {
 		public void startElement(String uri, String localName, String qName,
 				Attributes attributes) throws SAXException {
 			// TODO Auto-generated method stub
+
 			if (localName.equalsIgnoreCase("title"))
 			{
 				state = stateTitle;
@@ -109,14 +112,3 @@ public class EventsActivity extends ListActivity {
 
 	}
 }
-
-/*import android.app.Activity;
-import android.os.Bundle;
-
-public class EventsActivity extends Activity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.events);
-    }
-}*/

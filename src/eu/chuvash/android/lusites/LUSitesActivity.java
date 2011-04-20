@@ -37,7 +37,7 @@ import android.widget.Button;
 import static eu.chuvash.android.lusites.model.LUSitesList.LUSITES_NAMES;
 
 public class LUSitesActivity extends MapActivity {
-	private static final String TAG = "LUSitesActivity";
+	//private static final String TAG = "LUSitesActivity";
 	private static final int FIND_FIELD_THRESHOLD = 1;// after how many characters
 												// dropdown is shown
 	private MapView lusitesMap;
