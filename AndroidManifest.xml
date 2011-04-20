@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".Settings"
 	              android:label="@string/settings_label"/>
+        <activity android:name=".EventsActivity"
+	              android:label="@string/events_label"/>
 
 		<uses-library android:name="com.google.android.maps" />
 		

@@ -13,4 +13,9 @@
 		android:title="@string/menu_settings_title"  
 		android:id="@+id/settings_menu" 
 		android:icon="@android:drawable/ic_menu_preferences"/>	
+	<item
+		android:alphabeticShortcut="@string/menu_events_alphabetic_shortcut"
+		android:title="@string/menu_events_title"
+		android:id="@+id/events_menu"
+		android:icon="@android:drawable/ic_menu_today"/>	
 </menu>

@@ -1,6 +1,14 @@
 package eu.chuvash.android.lusites;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.widget.Toast;
+
 import java.util.List;
+import java.util.Locale;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -14,25 +22,22 @@ import eu.chuvash.android.lusites.overlays.OverlayMediator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Location;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.Menu;
 import android.view.View;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Toast;
 //TODO move LUSITES_NAMES to OverlayMediator
 import static eu.chuvash.android.lusites.model.LUSitesList.LUSITES_NAMES;
 
 public class LUSitesActivity extends MapActivity {
-	//private static final String TAG = "LUSitesActivity";
+	private static final String TAG = "LUSitesActivity";
 	private static final int FIND_FIELD_THRESHOLD = 1;// after how many characters
 												// dropdown is shown
 	private MapView lusitesMap;
@@ -40,7 +45,6 @@ public class LUSitesActivity extends MapActivity {
 	private AutoCompleteTextView findField;
 	private Button findButton;
 	private OverlayMediator oMediator;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,13 +83,20 @@ public class LUSitesActivity extends MapActivity {
 			}
 		});
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
-		return true;
+		//return true;		
+	
+		SubMenu langMenu = menu.addSubMenu(0, 200, 2, "Language settings").setIcon(android.R.drawable.ic_menu_rotate);
+        langMenu.add(1, 201, 0, "Svenska");
+        langMenu.add(1, 202, 0, "English");
+
+        return super.onCreateOptionsMenu(menu);
+	
 	}
 
 	@Override
@@ -93,10 +104,19 @@ public class LUSitesActivity extends MapActivity {
 		switch (item.getItemId()) {
 		case R.id.settings_menu:
 			startSettings();
+			break;
+		case R.id.events_menu:
+			startEventsActivity();
+			break;
 		}
+			
 		return false;
 	}
-
+	  
+	private void startEventsActivity() {
+		Intent intent = new Intent(this, EventsActivity.class);
+		startActivity(intent);		
+	}
 	private void initPrefChangeListener() {
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -200,6 +220,7 @@ public class LUSitesActivity extends MapActivity {
 	 * ,+13.193483054637909
 	 * &sll=37.0625,-95.677068&sspLog.d(TAG, "addOverlay");n=33.29802,79.013672&ie=UTF8&z=15
 	 */
+	
 	private GeoPoint getCenterLocation() {
 		int latE6 = (int) (55.705829655611645 * 1E6);
 		int longE6 = (int) (13.193483054637909 * 1E6);
@@ -241,4 +262,35 @@ public class LUSitesActivity extends MapActivity {
 		//controller.zoomToSpan(gp.getLatitudeE6(), gp.getLongitudeE6());
 		//controller.setZoom(17);
 	}
+	
+	
+	
+   /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+
+        case 201:
+
+            Locale locale = new Locale("sv"); 
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+            Toast.makeText(this, "Svensk inställning", Toast.LENGTH_LONG).show();
+            break;
+
+        case 202:
+
+            Locale locale2 = new Locale("en"); 
+            Locale.setDefault(locale2);
+            Configuration config2 = new Configuration();
+            config2.locale = locale2;
+            getBaseContext().getResources().updateConfiguration(config2, getBaseContext().getResources().getDisplayMetrics());
+
+            Toast.makeText(this, "English setting", Toast.LENGTH_LONG).show();
+            break;  
+
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
 }
