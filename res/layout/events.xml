@@ -12,5 +12,5 @@
  	android:id="@android:id/empty"
  	android:layout_width="fill_parent"
  	android:layout_height="wrap_content"
- 	android:text="No Data" />
+ 	android:text="@string/events_list_empty" />
 </LinearLayout>

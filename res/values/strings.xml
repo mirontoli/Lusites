@@ -24,4 +24,5 @@
     <string name="menu_events_alphabetic_shortcut">e</string>
     <string name="menu_events_title">Events</string>
     <string name="events_label">Events</string>
+    <string name="events_list_empty">No Data</string>
 </resources>
