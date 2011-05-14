@@ -89,11 +89,11 @@ public class LUSitesActivity extends MapActivity {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
-		//return true;		
-	
-		SubMenu langMenu = menu.addSubMenu(0, 200, 2, "Language settings").setIcon(android.R.drawable.ic_menu_rotate);
-        langMenu.add(1, 201, 0, "Svenska");
-        langMenu.add(1, 202, 0, "English");
+		
+		//This is to change lusites names language		
+		//SubMenu langMenu = menu.addSubMenu(0, 200, 2, "Language settings").setIcon(android.R.drawable.ic_menu_rotate);
+        //langMenu.add(1, 201, 0, "Svenska");
+        //langMenu.add(1, 202, 0, "English");
 
         return super.onCreateOptionsMenu(menu);
 	

@@ -65,6 +65,7 @@ public class EventsActivity extends ListActivity {
 		final int stateUnknown = 0;
 		final int stateTitle = 1;
 		int state = stateUnknown;
+		boolean firstTitleSeen = false;//the first title is a xml document title, not a news
 
 		@Override
 		public void startDocument() throws SAXException {
@@ -105,8 +106,10 @@ public class EventsActivity extends ListActivity {
 			String strCharacters = new String(ch, start, length);
 			if (state == stateTitle)
 			{
-				item.add(strCharacters);
-
+				if (firstTitleSeen) {
+					item.add(strCharacters);
+				}
+				else firstTitleSeen = true;
 			}
 		}
 
