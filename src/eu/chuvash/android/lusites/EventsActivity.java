@@ -17,12 +17,18 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 
 public class EventsActivity extends ListActivity {
 	//private static final String TAG = "EventsActivity";
-	private List<String> item = new ArrayList<String>();
+	private List<String> titles = new ArrayList<String>();
+	private List<String> links = new ArrayList<String>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,18 +60,33 @@ public class EventsActivity extends ListActivity {
 			e.printStackTrace();
 		}
 
-		ArrayAdapter<String> itemList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item);
+		ArrayAdapter<String> itemList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles);
 		setListAdapter(itemList);
 		//test http://developer.android.com/guide/tutorials/views/hello-listview.html
 		getListView().setTextFilterEnabled(true);
+		getListView().setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> aw, View v, int position,
+					long arg3) {
+				//aw.getItemAtPosition(position);
+				//browser intent
+				//http://stackoverflow.com/questions/3004515/android-sending-an-intent-to-browser-to-open-specific-url
+				String url = links.get(position);
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				startActivity(i);
+			}
+		});
 	}
 	private class RSSHandler extends DefaultHandler
 	{
 		final int stateUnknown = 0;
 		final int stateTitle = 1;
+		final int stateLink = 2;
 		int state = stateUnknown;
 		boolean firstTitleSeen = false;//the first title is a xml document title, not a news
+		boolean firstLinkSeen = false;
 
 		@Override
 		public void startDocument() throws SAXException {
@@ -82,12 +103,13 @@ public class EventsActivity extends ListActivity {
 				Attributes attributes) throws SAXException {
 			// TODO Auto-generated method stub
 
-			if (localName.equalsIgnoreCase("title"))
-			{
+			if (localName.equalsIgnoreCase("title")) {
 				state = stateTitle;
 			}
-			else
-			{
+			else if (localName.equalsIgnoreCase("link")) {
+				state = stateLink;
+			}
+			else {
 				state = stateUnknown;
 			}
 		}
@@ -104,12 +126,17 @@ public class EventsActivity extends ListActivity {
 		throws SAXException {
 			// TODO Auto-generated method stub
 			String strCharacters = new String(ch, start, length);
-			if (state == stateTitle)
-			{
+			if (state == stateTitle) {
 				if (firstTitleSeen) {
-					item.add(strCharacters);
+					titles.add(strCharacters);
 				}
 				else firstTitleSeen = true;
+			}
+			else if (state == stateLink) {
+				if (firstLinkSeen) {
+					links.add(strCharacters);
+				}
+				else firstLinkSeen = true;
 			}
 		}
 
