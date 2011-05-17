@@ -6,7 +6,8 @@
     <LinearLayout
 		android:orientation="horizontal"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:id="@+id/find_area">
   		<AutoCompleteTextView
   			android:id="@+id/find_field"
   			android:layout_width="wrap_content"

@@ -1,10 +1,12 @@
 package eu.chuvash.android.lusites;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 import java.util.List;
@@ -33,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 //TODO move LUSITES_NAMES to OverlayMediator
 import static eu.chuvash.android.lusites.model.LUSitesList.LUSITES_NAMES;
 
@@ -43,6 +46,8 @@ public class LUSitesActivity extends MapActivity {
 	private MapView lusitesMap;
 	private MapController controller;
 	private AutoCompleteTextView findField;
+	private LinearLayout findArea;
+	private int findAreaHeight;
 	private Button findButton;
 	private OverlayMediator oMediator;
 
@@ -56,6 +61,7 @@ public class LUSitesActivity extends MapActivity {
 		initPrefChangeListener();
 		initFindField();
 		initFindButton();
+		initFindArea();
 	}
 	private void initFindField() {
 		findField = (AutoCompleteTextView) findViewById(R.id.find_field);
@@ -83,7 +89,14 @@ public class LUSitesActivity extends MapActivity {
 			}
 		});
 	}
-	
+	private void initFindArea() {
+		findArea = (LinearLayout) findViewById(R.id.find_area);
+		LayoutParams lp = findArea.getLayoutParams();
+		
+		findAreaHeight = lp.height;
+		lp.height = 0;
+		findArea.setLayoutParams(lp);
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -112,7 +125,13 @@ public class LUSitesActivity extends MapActivity {
 			
 		return false;
 	}
-	  
+	@Override
+	public boolean onSearchRequested() {
+		LayoutParams lp = findArea.getLayoutParams();
+		lp.height = findAreaHeight;
+		findArea.setLayoutParams(lp);
+		return false;
+	}
 	private void startEventsActivity() {
 		Intent intent = new Intent(this, EventsActivity.class);
 		startActivity(intent);		
